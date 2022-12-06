@@ -7,6 +7,9 @@ from itertools import chain
 RED = (255, 0, 0)
 BLACK = (0, 0, 0)
 
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+input_state = GPIO.input(23)
 
 class Game_Object:
     def __init__(self, length):  # Objects are created in the play area at the top of the screen
@@ -42,15 +45,7 @@ class Stacker_Game:
         self.max_fall = 14
 
     def input_listen(self):  # Listen for button pushes
-        x = 0
-        while x < 25:
-            input_state = GPIO.input(23)
-            if input_state == False:
-                print("Input Pushed")
-                return True
-            x += 1
-            time.sleep(.02)
-        return False
+        return True
 
     def board_update(self):  # Update the current game state of the internal board
         def below_check():
@@ -163,6 +158,7 @@ class Stacker_Game:
         print("game start")
         while self.Current_State != "END":  # Run until game completion
             print(self.current_frame)
+            print(input_state)
             if self.current_frame - self.last_input > self.FRAME_TIMING and self.active_game_object.is_falling is not True:  # If the lockout has been removed
                 self.is_input = self.input_listen()
                 if self.is_input:
