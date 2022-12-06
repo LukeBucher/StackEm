@@ -6,7 +6,9 @@ from itertools import chain
 
 RED = (255, 0, 0)
 BLACK = (0, 0, 0)
-
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+state = GPIO.input(23)
 
 class Game_Object:
     def __init__(self, length):  # Objects are created in the play area at the top of the screen
@@ -24,11 +26,6 @@ class Game_Object:
 class Stacker_Game:
     def __init__(self):
         self.pixels = neopixel.NeoPixel(board.D18, 300,brightness=.5,auto_write=False)
-        pixels_replace = [(255,255,255)] * 300
-
-        for i in range(len(self.pixels)):
-            self.pixels[i] = pixels_replace[i]
-
         self.MAX_X = 5
         self.MAX_Y = 15
         self.FRAME_TIMING = 30  # 30 frames must pass before the lock releases on input
@@ -138,29 +135,24 @@ class Stacker_Game:
         output = [(0, 0, 0)] * 300
         for x in range(self.MAX_X):
             for y in range(self.MAX_Y):
-                pixel = [[x * 2, y * 2], [(x * 2) + 1, y * 2], [x * 2, (y * 2) + 1], [(x * 2) + 1, (y * 2) + 1]]
-                cur_values = [[0, False]] * 4
+                pixel = [[x * 2, y * 2], [x * 2, (y * 2) + 1], [(x * 2) + 1, y * 2], [(x * 2) + 1, (y * 2) + 1]]
+                cur_values = [0] * 4
                 for i in range(4):
-                    cur_values[i][0] = pixel[i][0] * 30
-                    if pixel[i][0] % 2 == 1:
-                        cur_values[i][0] += 30-pixel[i][1]
+                    cur_values[i] = pixel[i][0] * 30
+                    if pixel[i][0] % 2 != 0:
+                        cur_values[i] += 30 - pixel[i][1]
                     else:
-                        cur_values[i][0] += pixel[i][1]
-                    cur_values[i][0] = 300 - cur_values[i][0]
-                if self.Board_State[x][y] is not None:
-                    for item in cur_values:
-                        item[1] = True
+                        cur_values[i] += pixel[i][1]
+                    cur_values[i] = 300 - cur_values[i]
                 for item in cur_values:
-                    if item[1]:
-                        output[item[0]] = RED
+                    if self.Board_State[x][y] is not None:
+                        output[item - 1] = RED
                     else:
-                        output[item[0]] = BLACK
+                        output[item - 1] = BLACK
+
         for i in range(len(self.pixels)):
             self.pixels[i] = output[i]
         self.pixels.show()
-        # Write to Output array
-        # Output to LEDs
-        pass
 
     def game_loop(self):  # Handles all high elevated logic for the game
         # 3 easiest - 1 hardest
@@ -179,15 +171,10 @@ class Stacker_Game:
 
 
 def main():
-    #print("start")
-    #game = Stacker_Game()
-    #game.game_loop()
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-    state = GPIO.input(23)
-    while state:
-        state = GPIO.input(23)
-        print("wait")
+    print("start")
+    game = Stacker_Game()
+    game.game_loop()
+
     return print("Success")
 
 main()
