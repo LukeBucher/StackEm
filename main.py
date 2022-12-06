@@ -173,7 +173,7 @@ class Stacker_Game:
 def main():
     print("start")
     game = Stacker_Game()
-    Stacker_Game.game_loop()
+    game.game_loop()
 
     return print("Success")
 
