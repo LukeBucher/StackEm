@@ -35,7 +35,7 @@ class Stacker_Game:
         self.MAX_Y = 15
         self.FRAME_TIMING = 30  # 30 frames must pass before the lock releases on input
         self.FALL_RATE = 10  # Every 10 frames we can move 1 y level
-        self.MOVE_RATE = 140  # Bigger is Easier Adjusted every 2 y level
+        self.MOVE_RATE = 70  # Bigger is Easier Adjusted every 2 y level
         self.STATES = ("INTRO", "START",
                        "END")  # Game state will move from INTRO to START on input, From Start to END on Game completion
 
@@ -133,7 +133,8 @@ class Stacker_Game:
                     self.active_game_object.is_active = False  # Will generate new object on next loop
                     self.max_fall -= 1
             else:
-                piece_move()
+                if self.current_frame - self.active_game_object.last_move_frame > self.MOVE_RATE:
+                    piece_move()
 
     def draw_board(self):  # Push board state to the physical LEDs
         # Convert tiles to pixels
