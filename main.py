@@ -8,7 +8,7 @@ RED = (255, 0, 0)
 BLACK = (0, 0, 0)
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-state = GPIO.input(23)
+
 
 class Game_Object:
     def __init__(self, length):  # Objects are created in the play area at the top of the screen
@@ -49,7 +49,8 @@ class Stacker_Game:
         self.max_fall = 15
 
     def input_listen(self):  # Listen for button pushes
-        print("Listening")
+        state = GPIO.input(23)
+        print(state)
         if state == False:
             print("Input Pushed")
             return True
