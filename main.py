@@ -159,12 +159,13 @@ class Stacker_Game:
         print("game start")
         while self.Current_State != "END":  # Run until game completion
             print(self.current_frame)
-            if self.current_frame - self.last_input > self.FRAME_TIMING and self.active_game_object.is_falling is not True:  # If the lockout has been removed
-                self.is_input = self.input_listen()
-                if self.is_input:
-                    self.last_input = self.current_frame  # Update input to start lock out again
-            else:
-                self.is_input = False
+            if self.active_game_object is not None:
+                if self.current_frame - self.last_input > self.FRAME_TIMING and self.active_game_object.is_falling is not True:  # If the lockout has been removed
+                    self.is_input = self.input_listen()
+                    if self.is_input:
+                        self.last_input = self.current_frame  # Update input to start lock out again
+                else:
+                    self.is_input = False
             self.board_update()  # Move gameplay loop
             self.draw_board()  # Update LEDs if needed
             time.sleep(1/self.FRAME_TIMING)  # we need to pause execution so that we run at 30 iterations each step. .03 Is 30 Milliseconds for 30FPS
