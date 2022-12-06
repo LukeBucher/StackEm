@@ -22,12 +22,12 @@ class Game_Object:
 
 
 class Stacker_Game:
-    def __init__(self, x, y):
+    def __init__(self):
         self.pixels = neopixel.NeoPixel(board.D18, 300)
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        self.MAX_X = x
-        self.MAX_Y = y
+        self.MAX_X = 5
+        self.MAX_Y = 15
         self.FRAME_TIMING = 30  # 30 frames must pass before the lock releases on input
         self.FALL_RATE = 10  # Every 10 frames we can move 1 y level
         self.MOVE_RATE = 35  # Bigger is Easier Adjusted every 2 y level
@@ -35,13 +35,13 @@ class Stacker_Game:
                        "END")  # Game state will move from INTRO to START on input, From Start to END on Game completion
 
         self.Current_State = self.STATES[0]  # All Games objects will start at the intro screen
-        self.Board_State = [None] * x[None] * y  # An empty board that does not contain any game objects start of game
+        self.Board_State = [None] * 5[None] * 15  # An empty board that does not contain any game objects start of game
         self.current_frame = 0  # total count of number of frames for this game iteration
         self.last_input = 0  # Frame number where button was last counted without a lock present
         self.is_input = False
         self.active_game_object = None
         self.difficulty = 3
-        self.max_fall = y
+        self.max_fall = 15
 
     def input_listen(self):  # Listen for button pushes
         state = GPIO.input(23)
@@ -172,7 +172,7 @@ class Stacker_Game:
 
 def main():
     print("start")
-    game = Stacker_Game(5, 15)
+    game = Stacker_Game()
     Stacker_Game.game_loop()
 
     return print("Success")
