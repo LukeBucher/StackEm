@@ -82,10 +82,10 @@ class Stacker_Game:
             cur_y, cur_x = self.active_game_object.y_pos, self.active_game_object.x_pos
             if self.active_game_object.Move_State == "RIGHT":  # Left most pixel needs to move Right
                 self.Board_State[cur_x][cur_y] = None  # Left most Tile is moved
-                self.Board_State[cur_x + length][cur_y] = self.active_game_object
+                self.Board_State[cur_x + self.active_game_object.length][cur_y] = self.active_game_object
                 self.active_game_object.x_pos += 1
             else:
-                self.Board_State[cur_x + length - 1][cur_y] = None  # Left most Tile is moved
+                self.Board_State[cur_x + self.active_game_object.length - 1][cur_y] = None  # Left most Tile is moved
                 self.Board_State[cur_x - 1][cur_y] = self.active_game_object
                 self.active_game_object.x_pos -= 1
 
