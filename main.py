@@ -158,6 +158,7 @@ class Stacker_Game:
 
     def game_loop(self):  # Handles all high elevated logic for the game
         # 3 easiest - 1 hardest
+        print("game start")
         while self.Current_State != "END":  # Run until game completion
             if self.current_frame - self.last_input > self.FRAME_TIMING:  # If the lockout has been removed
                 self.is_input = self.input_listen()
@@ -170,6 +171,7 @@ class Stacker_Game:
 
 
 def main():
+    print("start")
     game = Stacker_Game(5, 15)
     Stacker_Game.game_loop()
 
