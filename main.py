@@ -142,12 +142,12 @@ class Stacker_Game:
                         cur_values[i] += 30 - pixel[i][1]
                     else:
                         cur_values[i] += pixel[i][1]
-                    cur_values[i] = 300 - cur_values[i]
+                    cur_values[i] = 299 - cur_values[i]
                 for item in cur_values:
                     if self.Board_State[x][y] is not None:
-                        output[item - 1] = RED
+                        output[item] = RED
                     else:
-                        output[item - 1] = BLACK
+                        output[item] = BLACK
 
         for i in range(len(self.pixels)):
             self.pixels[i] = output[i]
