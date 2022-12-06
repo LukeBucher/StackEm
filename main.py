@@ -7,7 +7,6 @@ from itertools import chain
 RED = (255, 0, 0)
 BLACK = (0, 0, 0)
 
-input_state = None
 
 class Game_Object:
     def __init__(self, length):  # Objects are created in the play area at the top of the screen
@@ -43,7 +42,12 @@ class Stacker_Game:
         self.max_fall = 14
 
     def input_listen(self):  # Listen for button pushes
-        return True
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        input_state = GPIO.input(23)
+        if not input_state:
+            return True
+        return False
 
     def board_update(self):  # Update the current game state of the internal board
         def below_check():
@@ -171,9 +175,7 @@ class Stacker_Game:
 
 
 def main():
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-    input_state = GPIO.input(23)
+
     print("start")
     game = Stacker_Game()
     game.game_loop()
