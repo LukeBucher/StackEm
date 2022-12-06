@@ -75,6 +75,8 @@ class Stacker_Game:
 
         def piece_removal():  # Remove parts of the game piece that are not supported by pieces underneath
             cur_y, cur_x = self.active_game_object.y_pos, self.active_game_object.x_pos
+            if cur_y == 14:
+                return
             for tiles in range(self.active_game_object.length):
                 if self.Board_State[cur_x + tiles][cur_y + 1] == None:
                     self.Board_State[cur_x][cur_y] = None
