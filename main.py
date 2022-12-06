@@ -166,7 +166,7 @@ class Stacker_Game:
                 self.last_input = self.current_frame  # Update input to start lock out again
             self.board_update()  # Move gameplay loop
             self.draw_board()  # Update LEDs if needed
-            time.sleep(1)  # we need to pause execution so that we run at 30 iterations each step. .03 Is 30 Milliseconds for 30FPS
+            #time.sleep(1)  # we need to pause execution so that we run at 30 iterations each step. .03 Is 30 Milliseconds for 30FPS
             self.current_frame += 1
 
 
