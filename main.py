@@ -41,16 +41,34 @@ class Stacker_Game:
         self.difficulty = 3
         self.max_fall = 14
 
+
+
+
+    def piece_move(self):
+        cur_y, cur_x = self.active_game_object.y_pos, self.active_game_object.x_pos
+        if self.active_game_object.Move_State == "RIGHT":  # Left most pixel needs to move Right
+            self.Board_State[cur_x][cur_y] = None  # Left most Tile is moved
+            self.Board_State[cur_x + self.active_game_object.length][cur_y] = self.active_game_object
+            self.active_game_object.x_pos += 1
+        else:
+            self.Board_State[cur_x + self.active_game_object.length - 1][cur_y] = None  # Left most Tile is moved
+            self.Board_State[cur_x - 1][cur_y] = self.active_game_object
+            self.active_game_object.x_pos -= 1
+
+        if self.active_game_object.x_pos + self.active_game_object.length == self.MAX_X:  # Compare if Object needs to move left or right
+            self.active_game_object.Move_State = self.active_game_object.MOVE_STATES[0]
+        elif self.active_game_object.x_pos == 0:
+            self.active_game_object.Move_State = self.active_game_object.MOVE_STATES[1]
+        self.active_game_object.last_move_frame = self.current_frame
+
     def input_listen(self):  # Listen for button pushes
-        x = 0
-        while x < 25:
+        while True:
             input_state = GPIO.input(23)
             if input_state == False:
-                print("Input Pushed")
-                return True
-            x += 1
-            time.sleep(.02)
-        return False
+                print('Button Pressed')
+                break
+            else:
+                self.piece_move()
 
     def board_update(self):  # Update the current game state of the internal board
         def below_check():
@@ -82,22 +100,7 @@ class Stacker_Game:
                     self.active_game_object.length -= 1
                     self.difficulty -= 1
 
-        def piece_move():
-            cur_y, cur_x = self.active_game_object.y_pos, self.active_game_object.x_pos
-            if self.active_game_object.Move_State == "RIGHT":  # Left most pixel needs to move Right
-                self.Board_State[cur_x][cur_y] = None  # Left most Tile is moved
-                self.Board_State[cur_x + self.active_game_object.length][cur_y] = self.active_game_object
-                self.active_game_object.x_pos += 1
-            else:
-                self.Board_State[cur_x + self.active_game_object.length - 1][cur_y] = None  # Left most Tile is moved
-                self.Board_State[cur_x - 1][cur_y] = self.active_game_object
-                self.active_game_object.x_pos -= 1
 
-            if self.active_game_object.x_pos + self.active_game_object.length == self.MAX_X:  # Compare if Object needs to move left or right
-                self.active_game_object.Move_State = self.active_game_object.MOVE_STATES[0]
-            elif self.active_game_object.x_pos == 0:
-                self.active_game_object.Move_State = self.active_game_object.MOVE_STATES[1]
-            self.active_game_object.last_move_frame = self.current_frame
 
         def end_game():
             self.Current_State = self.STATES[2]  # End Game to break loop
@@ -163,7 +166,7 @@ class Stacker_Game:
         print("game start")
         while self.Current_State != "END":  # Run until game completion
             print(self.current_frame)
-            if self.current_frame - self.last_input > self.FRAME_TIMING:  # If the lockout has been removed
+            if self.current_frame - self.last_input > self.FRAME_TIMING and self.active_game_object.is_falling is not True:  # If the lockout has been removed
                 self.is_input = self.input_listen()
                 if self.is_input:
                     self.last_input = self.current_frame  # Update input to start lock out again
