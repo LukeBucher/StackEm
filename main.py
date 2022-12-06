@@ -41,34 +41,16 @@ class Stacker_Game:
         self.difficulty = 3
         self.max_fall = 14
 
-
-
-
-    def piece_move(self):
-        cur_y, cur_x = self.active_game_object.y_pos, self.active_game_object.x_pos
-        if self.active_game_object.Move_State == "RIGHT":  # Left most pixel needs to move Right
-            self.Board_State[cur_x][cur_y] = None  # Left most Tile is moved
-            self.Board_State[cur_x + self.active_game_object.length][cur_y] = self.active_game_object
-            self.active_game_object.x_pos += 1
-        else:
-            self.Board_State[cur_x + self.active_game_object.length - 1][cur_y] = None  # Left most Tile is moved
-            self.Board_State[cur_x - 1][cur_y] = self.active_game_object
-            self.active_game_object.x_pos -= 1
-
-        if self.active_game_object.x_pos + self.active_game_object.length == self.MAX_X:  # Compare if Object needs to move left or right
-            self.active_game_object.Move_State = self.active_game_object.MOVE_STATES[0]
-        elif self.active_game_object.x_pos == 0:
-            self.active_game_object.Move_State = self.active_game_object.MOVE_STATES[1]
-        self.active_game_object.last_move_frame = self.current_frame
-
     def input_listen(self):  # Listen for button pushes
-        while True:
+        x = 0
+        while x < 25:
             input_state = GPIO.input(23)
             if input_state == False:
-                print('Button Pressed')
-                break
-            else:
-                self.piece_move()
+                print("Input Pushed")
+                return True
+            x += 1
+            time.sleep(.02)
+        return False
 
     def board_update(self):  # Update the current game state of the internal board
         def below_check():
@@ -100,7 +82,22 @@ class Stacker_Game:
                     self.active_game_object.length -= 1
                     self.difficulty -= 1
 
+        def piece_move():
+            cur_y, cur_x = self.active_game_object.y_pos, self.active_game_object.x_pos
+            if self.active_game_object.Move_State == "RIGHT":  # Left most pixel needs to move Right
+                self.Board_State[cur_x][cur_y] = None  # Left most Tile is moved
+                self.Board_State[cur_x + self.active_game_object.length][cur_y] = self.active_game_object
+                self.active_game_object.x_pos += 1
+            else:
+                self.Board_State[cur_x + self.active_game_object.length - 1][cur_y] = None  # Left most Tile is moved
+                self.Board_State[cur_x - 1][cur_y] = self.active_game_object
+                self.active_game_object.x_pos -= 1
 
+            if self.active_game_object.x_pos + self.active_game_object.length == self.MAX_X:  # Compare if Object needs to move left or right
+                self.active_game_object.Move_State = self.active_game_object.MOVE_STATES[0]
+            elif self.active_game_object.x_pos == 0:
+                self.active_game_object.Move_State = self.active_game_object.MOVE_STATES[1]
+            self.active_game_object.last_move_frame = self.current_frame
 
         def end_game():
             self.Current_State = self.STATES[2]  # End Game to break loop
@@ -147,7 +144,7 @@ class Stacker_Game:
                 for i in range(4):
                     cur_values[i] = pixel[i][0] * 30
                     if pixel[i][0] % 2 != 0:
-                        cur_values[i] += 30 - pixel[i][1]
+                        cur_values[i] += 31 - pixel[i][1]
                     else:
                         cur_values[i] += pixel[i][1]
                     cur_values[i] = 299 - cur_values[i]
