@@ -105,9 +105,8 @@ class Stacker_Game:
         if self.active_game_object is None:  # If there is no current playable object generate one in the playable area
             self.active_game_object = Game_Object(self.difficulty)
             for length in range(self.active_game_object.length):
-                start_pos = self.active_game_object.x_pos
-                self.Board_State[start_pos][0] = self.active_game_object  # Update the location of the new game object
-                start_pos += 1
+                self.Board_State[length][0] = self.active_game_object  # Update the location of the new game object
+
 
         if self.is_input and self.active_game_object.is_falling is False:  # User input has been pressed
             self.active_game_object.is_falling = True
