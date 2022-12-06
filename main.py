@@ -158,7 +158,7 @@ class Stacker_Game:
         # 3 easiest - 1 hardest
         print("game start")
         while self.Current_State != "END":  # Run until game completion
-            print(self.current_frame)
+            print(input_state)
             if self.active_game_object is not None:
                 if self.current_frame - self.last_input > self.FRAME_TIMING and self.active_game_object.is_falling is not True:  # If the lockout has been removed
                     self.is_input = self.input_listen()
