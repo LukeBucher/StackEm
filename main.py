@@ -6,9 +6,7 @@ from itertools import chain
 
 RED = (255, 0, 0)
 BLACK = (0, 0, 0)
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-state = GPIO.input(23)
+
 
 class Game_Object:
     def __init__(self, length):  # Objects are created in the play area at the top of the screen
@@ -184,7 +182,10 @@ def main():
     #print("start")
     #game = Stacker_Game()
     #game.game_loop()
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     while state:
+        state = GPIO.input(23)
         print("wait")
     return print("Success")
 
