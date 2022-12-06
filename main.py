@@ -39,7 +39,7 @@ class Stacker_Game:
         self.is_input = False
         self.active_game_object = None
         self.difficulty = 3
-        self.max_fall = 15
+        self.max_fall = 14
 
     def input_listen(self):  # Listen for button pushes
         while True:
@@ -123,7 +123,8 @@ class Stacker_Game:
                     if self.current_frame - self.active_game_object.last_fall_frame > self.FALL_RATE:
                         piece_fall()
                 else:
-                    piece_removal()  # Validate piece is in a valid location
+                    if self.active_game_object.y_pos != self.max_fall:
+                        piece_removal()  # Validate piece is in a valid location
                     self.active_game_object.is_falling = False  # Game object is no longer falling
                     self.active_game_object.is_active = False  # Will generate new object on next loop
                     self.max_fall -= 1
