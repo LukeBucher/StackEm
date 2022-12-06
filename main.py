@@ -23,7 +23,7 @@ class Game_Object:
 
 class Stacker_Game:
     def __init__(self):
-        self.pixels = neopixel.NeoPixel(board.D18, 300)
+        self.pixels = neopixel.NeoPixel(board.D18, 300,brightness=.5,auto_write=False)
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         pixels_replace = [(255,255,255)] * 300
@@ -155,8 +155,9 @@ class Stacker_Game:
                         output[item[0]] = RED
                     else:
                         output[item[0]] = BLACK
-        self.pixels = output
-
+        for i in range(len(self.pixels)):
+            self.pixels[i] = output[i]
+        self.pixels.show()
         # Write to Output array
         # Output to LEDs
         pass
