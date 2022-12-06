@@ -46,7 +46,7 @@ class Stacker_Game:
     def input_listen(self):  # Listen for button pushes
         if not input_state:
             return True
-        return False
+        return True
 
     def board_update(self):  # Update the current game state of the internal board
         def below_check():
