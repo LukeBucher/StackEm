@@ -43,7 +43,7 @@ class Stacker_Game:
 
     def input_listen(self):  # Listen for button pushes
         GPIO.setmode(GPIO.BCM)
-        GPIO.setup(18, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         input_state = GPIO.input(23)
         if not input_state:
             return True
