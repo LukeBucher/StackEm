@@ -134,7 +134,7 @@ class Stacker_Game:
         for x in range(self.MAX_X):
             for y in range(self.MAX_Y):
                 pixel = [((x * 2), (y * 2)), ((x * 2) + 1, (y * 2)), ((x * 2), (y * 2) + 1), ((x * 2) + 1, (y * 2) + 1)]
-                cur_values = [(0,False)] * 4
+                cur_values = [[0, False]] * 4
                 for i in range(4):
                     cur_values[i][0] = pixel[i][0] * 30
                     if pixel[i][0] % 2 == 1:
@@ -159,6 +159,7 @@ class Stacker_Game:
     def game_loop(self):  # Handles all high elevated logic for the game
         # 3 easiest - 1 hardest
         print("game start")
+        print(self.current_frame)
         while self.Current_State != "END":  # Run until game completion
             if self.current_frame - self.last_input > self.FRAME_TIMING:  # If the lockout has been removed
                 self.is_input = self.input_listen()
@@ -168,6 +169,7 @@ class Stacker_Game:
             time.sleep(
                 1 / self.FRAME_TIMING)  # we need to pause execution so that we run at 30 iterations each step. .03 Is 30 Milliseconds for 30FPS
             self.current_frame += 1
+
 
 
 def main():
