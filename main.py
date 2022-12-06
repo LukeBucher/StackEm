@@ -42,12 +42,15 @@ class Stacker_Game:
         self.max_fall = 14
 
     def input_listen(self):  # Listen for button pushes
-        input_state = GPIO.input(23)
-        if input_state == False:
-            print("Input Pushed")
-            return True
-        else:
-            return False
+        x = 0
+        while x < 25:
+            input_state = GPIO.input(23)
+            if input_state == False:
+                print("Input Pushed")
+                return True
+            x += 1
+            time.sleep(.02)
+        return False
 
     def board_update(self):  # Update the current game state of the internal board
         def below_check():
