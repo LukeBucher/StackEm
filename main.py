@@ -26,7 +26,11 @@ class Stacker_Game:
         self.pixels = neopixel.NeoPixel(board.D18, 300)
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-        self.pixels = [(255,255,255)] * 300
+        pixels_replace = [(255,255,255)] * 300
+
+        for i in range(len(self.pixels)):
+            self.pixels[i] = pixels_replace[i]
+
         self.MAX_X = 5
         self.MAX_Y = 15
         self.FRAME_TIMING = 30  # 30 frames must pass before the lock releases on input
