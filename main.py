@@ -35,7 +35,7 @@ class Stacker_Game:
         self.MAX_Y = 15
         self.FRAME_TIMING = 30  # 30 frames must pass before the lock releases on input
         self.FALL_RATE = 10  # Every 10 frames we can move 1 y level
-        self.MOVE_RATE = 70  # Bigger is Easier Adjusted every 2 y level
+        self.MOVE_RATE = 35  # Bigger is Easier Adjusted every 2 y level
         self.STATES = ("INTRO", "START",
                        "END")  # Game state will move from INTRO to START on input, From Start to END on Game completion
 
@@ -141,7 +141,7 @@ class Stacker_Game:
         output = [(0, 0, 0)] * 300
         for x in range(self.MAX_X):
             for y in range(self.MAX_Y):
-                pixel = [((x * 2), (y * 2)), ((x * 2) + 1, (y * 2)), ((x * 2), (y * 2) + 1), ((x * 2) + 1, (y * 2) + 1)]
+                pixel = [[x * 2, y * 2], [(x * 2) + 1, y * 2], [x * 2, (y * 2) + 1], [(x * 2) + 1, (y * 2) + 1]]
                 cur_values = [[0, False]] * 4
                 for i in range(4):
                     cur_values[i][0] = pixel[i][0] * 30
