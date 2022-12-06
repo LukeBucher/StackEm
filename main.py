@@ -138,9 +138,9 @@ class Stacker_Game:
                 for i in range(4):
                     cur_values[i][0] = pixel[i][0] * 30
                     if pixel[i][0] % 2 == 1:
-                        cur_values[i] += 30-pixel[i][1]
+                        cur_values[i][0] += 30-pixel[i][1]
                     else:
-                        cur_values[i] += pixel[i][1]
+                        cur_values[i][0] += pixel[i][1]
                     cur_values[i][0] = 300 - cur_values[i][0]
                 if self.Board_State[x][y] is not None:
                     for item in cur_values:
