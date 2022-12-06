@@ -35,7 +35,7 @@ class Stacker_Game:
                        "END")  # Game state will move from INTRO to START on input, From Start to END on Game completion
 
         self.Current_State = self.STATES[0]  # All Games objects will start at the intro screen
-        self.Board_State = [[None for i in range(5)] for j in range(15)]  # An empty board that does not contain any game objects start of game
+        self.Board_State = [[None for i in range(15)] for j in range(5)]  # An empty board that does not contain any game objects start of game
         self.current_frame = 0  # total count of number of frames for this game iteration
         self.last_input = 0  # Frame number where button was last counted without a lock present
         self.is_input = False
