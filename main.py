@@ -26,7 +26,7 @@ class Stacker_Game:
         self.pixels = neopixel.NeoPixel(board.D18, 300,brightness=.5,auto_write=False)
         self.MAX_X = 5
         self.MAX_Y = 15
-        self.FRAME_TIMING = 30  # 30 frames must pass before the lock releases on input
+        self.FRAME_TIMING = 15  # 30 frames must pass before the lock releases on input
         self.FALL_RATE = 10  # Every 10 frames we can move 1 y level
         self.MOVE_RATE = 35  # Bigger is Easier Adjusted every 2 y level
         self.STATES = ("INTRO", "START",
@@ -42,11 +42,10 @@ class Stacker_Game:
         self.max_fall = 14
 
     def input_listen(self):  # Listen for button pushes
-        while True:
-            input_state = GPIO.input(18)
-            if input_state == False:
-                print('Button Pressed')
-                break
+        x = 0
+        while x < 200:
+            input_state = GPIO.input(23)
+            x += 1
         if input_state == False:
             print("Input Pushed")
             return True
