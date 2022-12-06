@@ -144,7 +144,7 @@ class Stacker_Game:
                 for i in range(4):
                     cur_values[i] = pixel[i][0] * 30
                     if pixel[i][0] % 2 != 0:
-                        cur_values[i] += 31 - pixel[i][1]
+                        cur_values[i] += 29 - pixel[i][1]
                     else:
                         cur_values[i] += pixel[i][1]
                     cur_values[i] = 299 - cur_values[i]
