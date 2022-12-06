@@ -50,6 +50,7 @@ class Stacker_Game:
 
     def input_listen(self):  # Listen for button pushes
         state = GPIO.input(23)
+        print("Listening")
         if state == False:
             print("Input Pushed")
             return True
@@ -181,10 +182,6 @@ class Stacker_Game:
 
 def main():
     print("start")
-    pixels = neopixel.NeoPixel(board.D18, 300)
-    GPIO.setmode(GPIO.BCM)
-    GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-    pixels = [(255, 255, 255)] * 300
     game = Stacker_Game()
     game.game_loop()
 
