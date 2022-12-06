@@ -176,3 +176,5 @@ def main():
     Stacker_Game.game_loop()
 
     return print("Success")
+
+main()
