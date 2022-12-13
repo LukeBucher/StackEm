@@ -73,7 +73,7 @@ class Stacker_Game:
             self.piece_fall()
         else:  # If the Stack is at the top of the Game area end the game
             self.end_game()
-        if self.max_fall % 2 is 1:
+        if self.max_fall % 2 == 1:
             self.MOVE_RATE -= 1
 
     def board_update(self):  # Update the current game state of the internal board
@@ -109,7 +109,7 @@ class Stacker_Game:
             self.end_game()
 
         if self.active_game_object is None:  # If there is no current playable object generate one in the playable area
-            self.active_game_object = Game_Object(self.difficulty,random.randint(0,5 - self.difficulty))
+            self.active_game_object = Game_Object(self.difficulty,random.randint(0,4 - self.difficulty))
             for length in range(self.active_game_object.length):
                 self.Board_State[length][0] = self.active_game_object  # Update the location of the new game object
 
