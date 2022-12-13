@@ -113,7 +113,7 @@ class Stacker_Game:
             self.end_game()
 
         if self.active_game_object is None:  # If there is no current playable object generate one in the playable area
-            if self.difficulty > 0 and self.max_fall > 1:
+            if self.difficulty > 0 and self.max_fall > 0:
                 self.active_game_object = Game_Object(self.difficulty,self.current_frame)
                 for length in range(self.active_game_object.length):
                     self.Board_State[length][0] = self.active_game_object  # Update the location of the new game object
@@ -169,7 +169,6 @@ class Stacker_Game:
                 1 / self.FRAME_TIMING)  # we need to pause execution so that we run at 30 iterations each step. .03 Is 30 Milliseconds for 30FPS
             self.current_frame += 1
             self.is_input = False
-            print(self.max_fall)
             if 11 > self.max_fall > 7 and game_state == 2:
                 self.CURRENT_COLOR = (0,0,255)
                 game_state = 1
