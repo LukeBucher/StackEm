@@ -2,6 +2,7 @@ from gpiozero import Button
 import board
 import neopixel
 import time
+import random
 import sys
 from itertools import chain
 
@@ -11,11 +12,11 @@ button = Button(2,bounce_time = .5)
 
 
 class Game_Object:
-    def __init__(self, length):  # Objects are created in the play area at the top of the screen
+    def __init__(self, length,x):  # Objects are created in the play area at the top of the screen
         self.MOVE_STATES = ("LEFT", "RIGHT")
         self.Move_State = self.MOVE_STATES[1]
         self.length = length
-        self.x_pos = 0
+        self.x_pos = x
         self.y_pos = 0
         self.is_active = True  # Playable user piece
         self.is_falling = False  # User has dropped the object
@@ -108,7 +109,7 @@ class Stacker_Game:
             self.end_game()
 
         if self.active_game_object is None:  # If there is no current playable object generate one in the playable area
-            self.active_game_object = Game_Object(self.difficulty)
+            self.active_game_object = Game_Object(self.difficulty,random.randint(0,5 - self.difficulty))
             for length in range(self.active_game_object.length):
                 self.Board_State[length][0] = self.active_game_object  # Update the location of the new game object
 
