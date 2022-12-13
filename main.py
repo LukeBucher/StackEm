@@ -75,6 +75,11 @@ class Stacker_Game:
             self.end_game()
         if self.max_fall % 4 == 1:
             self.MOVE_RATE -= 1
+        if self.max_fall < 10 and self.difficulty > 2:
+            self.difficulty = 2
+        elif self.max_fall < 5 and self.difficulty > 1:
+            self.difficulty = 1
+
 
     def board_update(self):  # Update the current game state of the internal board
         def piece_removal():  # Remove parts of the game piece that are not supported by pieces underneath
