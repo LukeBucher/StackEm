@@ -7,7 +7,7 @@ from itertools import chain
 
 RED = (255, 0, 0)
 BLACK = (0, 0, 0)
-button = Button(2)
+button = Button(2,bouncetime = 500)
 
 
 class Game_Object:
