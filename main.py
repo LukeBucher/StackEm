@@ -162,9 +162,6 @@ class Stacker_Game:
         print("game start")
         while self.Current_State != "END":  # Run until game completion
             print(self.is_input)
-            if self.active_game_object is not None:
-                if self.current_frame - self.last_input < self.FRAME_TIMING or self.active_game_object.is_falling is True:  # Set input false if lockout
-                    self.is_input = False
             self.board_update()  # Move gameplay loop
             self.draw_board()  # Update LEDs if needed
             time.sleep(
