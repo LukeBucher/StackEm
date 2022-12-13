@@ -2,6 +2,7 @@ import RPi.GPIO as GPIO
 import board
 import neopixel
 import time
+import sys
 from itertools import chain
 
 RED = (255, 0, 0)
@@ -185,3 +186,4 @@ try:
 
 finally:
     GPIO.cleanup()
+    sys.exit()
