@@ -48,12 +48,13 @@ class Stacker_Game:
 
 
     def losePrint(self):
-        for item in self.pixels:
-            item = BLACK
+        for item in range(self.pixels):
+            self.pixels[item] = BLACK
         self.pixels.show()
-        self.pixels[2] = self.CURRENT_COLOR
-        self.pixels[5] = self.CURRENT_COLOR
-        self.pixels[8] = self.CURRENT_COLOR
+        self.pixels[1] = self.CURRENT_COLOR
+        self.pixels[4] = self.CURRENT_COLOR
+        self.pixels[7] = self.CURRENT_COLOR
+
         self.pixels[52] = self.CURRENT_COLOR
         self.pixels[53] = self.CURRENT_COLOR
         self.pixels[54] = self.CURRENT_COLOR
@@ -61,19 +62,23 @@ class Stacker_Game:
         self.pixels[56] = self.CURRENT_COLOR
         self.pixels[57] = self.CURRENT_COLOR
         self.pixels[58] = self.CURRENT_COLOR
-        self.pixels[63] = self.CURRENT_COLOR
+
+        self.pixels[61] = self.CURRENT_COLOR
+        self.pixels[64] = self.CURRENT_COLOR
+        self.pixels[65] = self.CURRENT_COLOR
         self.pixels[66] = self.CURRENT_COLOR
         self.pixels[67] = self.CURRENT_COLOR
-        self.pixels[68] = self.CURRENT_COLOR
-        self.pixels[69] = self.CURRENT_COLOR
+
         self.pixels[112] = self.CURRENT_COLOR
         self.pixels[116] = self.CURRENT_COLOR
         self.pixels[117] = self.CURRENT_COLOR
         self.pixels[118] = self.CURRENT_COLOR
+
+        self.pixels[125] = self.CURRENT_COLOR
         self.pixels[126] = self.CURRENT_COLOR
         self.pixels[127] = self.CURRENT_COLOR
         self.pixels[128] = self.CURRENT_COLOR
-        self.pixels[129] = self.CURRENT_COLOR
+
         self.pixels[171] = self.CURRENT_COLOR
         self.pixels[176] = self.CURRENT_COLOR
         self.pixels[183] = self.CURRENT_COLOR
@@ -81,8 +86,10 @@ class Stacker_Game:
         self.pixels[187] = self.CURRENT_COLOR
         self.pixels[188] = self.CURRENT_COLOR
         self.pixels[189] = self.CURRENT_COLOR
+
         self.pixels[231] = self.CURRENT_COLOR
         self.pixels[250] = self.CURRENT_COLOR
+
         self.pixels[294] = self.CURRENT_COLOR
         self.pixels[295] = self.CURRENT_COLOR
         self.pixels[296] = self.CURRENT_COLOR
@@ -91,7 +98,7 @@ class Stacker_Game:
 
         self.pixels.show()
         sys.exit()
-        
+
     def below_check(self):
         cur_y, cur_x = self.active_game_object.y_pos, self.active_game_object.x_pos
         if cur_y + 1 == self.MAX_Y:  # We made it to the bottom of the board
