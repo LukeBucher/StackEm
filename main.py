@@ -51,6 +51,8 @@ class Stacker_Game:
         for item in range(len(self.pixels)):
             self.pixels[item] = BLACK
         self.pixels.show()
+        self.CURRENT_COLOR = (255, 0, 0)
+
         self.pixels[1] = self.CURRENT_COLOR
         self.pixels[4] = self.CURRENT_COLOR
         self.pixels[7] = self.CURRENT_COLOR
@@ -102,6 +104,78 @@ class Stacker_Game:
         self.pixels[296] = self.CURRENT_COLOR
         self.pixels[297] = self.CURRENT_COLOR
         self.pixels[298] = self.CURRENT_COLOR
+
+        self.pixels.show()
+        sys.exit()
+
+    def winPrint(self):
+        for item in range(len(self.pixels)):
+            self.pixels[item] = BLACK
+        self.pixels.show()
+        self.CURRENT_COLOR = (0, 255, 0)
+
+        self.pixels[1] = self.CURRENT_COLOR
+        self.pixels[2] = self.CURRENT_COLOR
+        self.pixels[3] = self.CURRENT_COLOR
+        self.pixels[4] = self.CURRENT_COLOR
+        self.pixels[5] = self.CURRENT_COLOR
+        self.pixels[6] = self.CURRENT_COLOR
+        self.pixels[7] = self.CURRENT_COLOR
+        self.pixels[8] = self.CURRENT_COLOR
+        self.pixels[9] = self.CURRENT_COLOR
+
+        self.pixels[53] = self.CURRENT_COLOR
+        self.pixels[54] = self.CURRENT_COLOR
+        self.pixels[55] = self.CURRENT_COLOR
+        self.pixels[56] = self.CURRENT_COLOR
+
+        self.pixels[61] = self.CURRENT_COLOR
+        self.pixels[62] = self.CURRENT_COLOR
+        self.pixels[63] = self.CURRENT_COLOR
+        self.pixels[64] = self.CURRENT_COLOR
+        self.pixels[65] = self.CURRENT_COLOR
+        self.pixels[66] = self.CURRENT_COLOR
+        self.pixels[67] = self.CURRENT_COLOR
+        self.pixels[68] = self.CURRENT_COLOR
+        self.pixels[69] = self.CURRENT_COLOR
+
+        self.pixels[111] = self.CURRENT_COLOR
+        self.pixels[112] = self.CURRENT_COLOR
+        self.pixels[113] = self.CURRENT_COLOR
+        self.pixels[114] = self.CURRENT_COLOR
+        self.pixels[115] = self.CURRENT_COLOR
+        self.pixels[116] = self.CURRENT_COLOR
+        self.pixels[117] = self.CURRENT_COLOR
+        self.pixels[118] = self.CURRENT_COLOR
+        self.pixels[119] = self.CURRENT_COLOR
+
+        self.pixels[171] = self.CURRENT_COLOR
+        self.pixels[172] = self.CURRENT_COLOR
+        self.pixels[173] = self.CURRENT_COLOR
+        self.pixels[174] = self.CURRENT_COLOR
+        self.pixels[175] = self.CURRENT_COLOR
+        self.pixels[176] = self.CURRENT_COLOR
+        self.pixels[178] = self.CURRENT_COLOR
+        self.pixels[179] = self.CURRENT_COLOR
+
+        self.pixels[189] = self.CURRENT_COLOR
+        self.pixels[190] = self.CURRENT_COLOR
+        self.pixels[191] = self.CURRENT_COLOR
+        self.pixels[192] = self.CURRENT_COLOR
+
+        self.pixels[230] = self.CURRENT_COLOR
+        self.pixels[231] = self.CURRENT_COLOR
+        self.pixels[232] = self.CURRENT_COLOR
+
+        self.pixels[241] = self.CURRENT_COLOR
+        self.pixels[242] = self.CURRENT_COLOR
+        self.pixels[243] = self.CURRENT_COLOR
+        self.pixels[244] = self.CURRENT_COLOR
+        self.pixels[245] = self.CURRENT_COLOR
+        self.pixels[246] = self.CURRENT_COLOR
+        self.pixels[247] = self.CURRENT_COLOR
+        self.pixels[248] = self.CURRENT_COLOR
+        self.pixels[249] = self.CURRENT_COLOR
 
         self.pixels.show()
         sys.exit()
