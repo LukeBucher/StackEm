@@ -157,7 +157,6 @@ class Stacker_Game:
         button.when_released = self.input_listen
         print("game start")
         while self.Current_State != "END":  # Run until game completion
-            print(self.is_input)
             self.board_update()  # Move gameplay loop
             self.draw_board()  # Update LEDs if needed
             time.sleep(
