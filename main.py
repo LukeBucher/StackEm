@@ -111,10 +111,11 @@ class Stacker_Game:
         if self.max_fall == 1:
             self.end_game()
 
-        if self.active_game_object is None and self.difficulty > 0:  # If there is no current playable object generate one in the playable area
-            self.active_game_object = Game_Object(self.difficulty)
-            for length in range(self.active_game_object.length):
-                self.Board_State[length][0] = self.active_game_object  # Update the location of the new game object
+        if self.active_game_object is None:  # If there is no current playable object generate one in the playable area
+            if self.difficulty > 0:
+                self.active_game_object = Game_Object(self.difficulty)
+                for length in range(self.active_game_object.length):
+                    self.Board_State[length][0] = self.active_game_object  # Update the location of the new game object
 
         if self.is_input and self.active_game_object.is_falling is False:  # User input has been pressed
             pass
