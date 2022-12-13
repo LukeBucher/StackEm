@@ -67,6 +67,7 @@ class Stacker_Game:
 
     def end_game(self):
         self.Current_State = self.STATES[2]  # End Game to break loop
+        self.active_game_object = None
 
     def input_listen(self):  # Listen for button pushes
         self.active_game_object.is_falling = True
