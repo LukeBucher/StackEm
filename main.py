@@ -6,9 +6,9 @@ from itertools import chain
 
 RED = (255, 0, 0)
 BLACK = (0, 0, 0)
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(37, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-input_state = GPIO.input(37)
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(26, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+input_state = GPIO.input(26)
 
 class Game_Object:
     def __init__(self, length):  # Objects are created in the play area at the top of the screen
@@ -156,7 +156,7 @@ class Stacker_Game:
 
     def game_loop(self):  # Handles all high elevated logic for the game
         # 3 easiest - 1 hardest
-        GPIO.add_event_detect(37,GPIO.FALLING, callback=self.input_listen,bouncetime=300)
+        GPIO.add_event_detect(26,GPIO.FALLING, callback=self.input_listen,bouncetime=300)
         print("game start")
         while self.Current_State != "END":  # Run until game completion
             print(input_state)
