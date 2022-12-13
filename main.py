@@ -6,7 +6,7 @@ import random
 import sys
 from itertools import chain
 
-CURRENT_COLOR = (255, 0, 0)
+CURRENT_COLOR = (0, 255, 0)
 BLACK = (0, 0, 0)
 button = Button(2,bounce_time = .5)
 
@@ -168,9 +168,11 @@ class Stacker_Game:
             self.current_frame += 1
             self.is_input = False
 
-            if self.max_fall < 12 and self.difficulty > 2:
+            if self.max_fall < 11 and self.difficulty > 2:
+                CURRENT_COLOR = (255,255,51)
                 self.difficulty = 2
-            elif self.max_fall < 9 and self.difficulty > 1:
+            elif self.max_fall < 6 and self.difficulty > 1:
+                CURRENT_COLOR = (255,0,0)
                 self.difficulty = 1
 
 def main():
