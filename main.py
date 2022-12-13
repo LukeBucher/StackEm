@@ -44,32 +44,38 @@ class Stacker_Game:
         self.difficulty = 2
         self.max_fall = 14
 
+    def below_check(self):
+        cur_y, cur_x = self.active_game_object.y_pos, self.active_game_object.x_pos
+        if cur_y + 1 == self.MAX_Y:  # We made it to the bottom of the board
+            return False
+        for tiles in range(self.active_game_object.length):
+            if self.Board_State[cur_x][cur_y + 1] is not None:
+                return False
+            cur_x += 1
+        return True
+
+    def piece_fall(self,entry):  # Move the piece at the current fall rate
+        print(entry)
+        cur_y, cur_x = self.active_game_object.y_pos, self.active_game_object.x_pos
+        for tiles in range(self.active_game_object.length):
+            self.Board_State[cur_x][cur_y] = None
+            self.Board_State[cur_x][cur_y + 1] = self.active_game_object
+            cur_x += 1
+        self.active_game_object.y_pos += 1
+        self.active_game_object.last_fall_frame = self.current_frame
+
+    def end_game(self):
+        self.Current_State = self.STATES[2]  # End Game to break loop
+
     def input_listen(self):  # Listen for button pushes
-        self.is_input = True
-        self.last_input = self.current_frame
-
-
+        self.active_game_object.is_falling = True
+        if self.below_check():  # If there is no piece below
+            self.piece_fall(entry="Input")
+        else:  # If the Stack is at the top of the Game area end the game
+            self.end_game()
 
     def board_update(self):  # Update the current game state of the internal board
-        def below_check():
-            cur_y, cur_x = self.active_game_object.y_pos, self.active_game_object.x_pos
-            if cur_y + 1 == self.MAX_Y:  # We made it to the bottom of the board
-                return False
-            for tiles in range(self.active_game_object.length):
-                if self.Board_State[cur_x][cur_y + 1] is not None:
-                    return False
-                cur_x += 1
-            return True
 
-        def piece_fall(entry):  # Move the piece at the current fall rate
-            print(entry)
-            cur_y, cur_x = self.active_game_object.y_pos, self.active_game_object.x_pos
-            for tiles in range(self.active_game_object.length):
-                self.Board_State[cur_x][cur_y] = None
-                self.Board_State[cur_x][cur_y + 1] = self.active_game_object
-                cur_x += 1
-            self.active_game_object.y_pos += 1
-            self.active_game_object.last_fall_frame = self.current_frame
 
         def piece_removal():  # Remove parts of the game piece that are not supported by pieces underneath
             cur_y, cur_x = self.active_game_object.y_pos, self.active_game_object.x_pos
@@ -98,11 +104,8 @@ class Stacker_Game:
                 self.active_game_object.Move_State = self.active_game_object.MOVE_STATES[1]
             self.active_game_object.last_move_frame = self.current_frame
 
-        def end_game():
-            self.Current_State = self.STATES[2]  # End Game to break loop
-
         if self.difficulty == 0:  # Player has Lost All blocks
-            end_game()
+            self.end_game()
 
         if self.active_game_object is None:  # If there is no current playable object generate one in the playable area
             self.active_game_object = Game_Object(self.difficulty)
@@ -110,17 +113,12 @@ class Stacker_Game:
                 self.Board_State[length][0] = self.active_game_object  # Update the location of the new game object
 
         if self.is_input and self.active_game_object.is_falling is False:  # User input has been pressed
-            self.active_game_object.is_falling = True
-            if below_check():  # If there is no piece below
-                piece_fall(entry="Input")
-            else:  # If the Stack is at the top of the Game area end the game
-                end_game()
-
+            pass
         else:  # When there is no user input we need to check the current active piece and either continue a fall or move
             if self.active_game_object.is_falling:
-                if below_check() and self.active_game_object.y_pos < self.max_fall:
+                if self.below_check() and self.active_game_object.y_pos < self.max_fall:
                     if self.current_frame - self.active_game_object.last_fall_frame > self.FALL_RATE:
-                        piece_fall(entry="Static")
+                        self.piece_fall(entry="Static")
                 else:
                     if self.active_game_object.y_pos != self.max_fall:
                         piece_removal()  # Validate piece is in a valid location
