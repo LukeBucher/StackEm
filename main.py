@@ -50,7 +50,44 @@ class Stacker_Game:
     def losePrint(self):
         for item in self.pixels:
             item = BLACK
-        self.pixels[2,5,8,55,56,57,58,63,66,67,68,69,112,116,117,118,126,127,128,129,171,176,183,186,187,188,189,231,250,294,295,296,297,298] = self.CURRENT_COLOR
+        self.pixels[2] = self.CURRENT_COLOR
+        self.pixels[5] = self.CURRENT_COLOR
+        self.pixels[8] = self.CURRENT_COLOR
+        self.pixels[52] = self.CURRENT_COLOR
+        self.pixels[53] = self.CURRENT_COLOR
+        self.pixels[54] = self.CURRENT_COLOR
+        self.pixels[55] = self.CURRENT_COLOR
+        self.pixels[56] = self.CURRENT_COLOR
+        self.pixels[57] = self.CURRENT_COLOR
+        self.pixels[58] = self.CURRENT_COLOR
+        self.pixels[63] = self.CURRENT_COLOR
+        self.pixels[66] = self.CURRENT_COLOR
+        self.pixels[67] = self.CURRENT_COLOR
+        self.pixels[68] = self.CURRENT_COLOR
+        self.pixels[69] = self.CURRENT_COLOR
+        self.pixels[112] = self.CURRENT_COLOR
+        self.pixels[116] = self.CURRENT_COLOR
+        self.pixels[117] = self.CURRENT_COLOR
+        self.pixels[118] = self.CURRENT_COLOR
+        self.pixels[126] = self.CURRENT_COLOR
+        self.pixels[127] = self.CURRENT_COLOR
+        self.pixels[128] = self.CURRENT_COLOR
+        self.pixels[129] = self.CURRENT_COLOR
+        self.pixels[171] = self.CURRENT_COLOR
+        self.pixels[176] = self.CURRENT_COLOR
+        self.pixels[183] = self.CURRENT_COLOR
+        self.pixels[186] = self.CURRENT_COLOR
+        self.pixels[187] = self.CURRENT_COLOR
+        self.pixels[188] = self.CURRENT_COLOR
+        self.pixels[189] = self.CURRENT_COLOR
+        self.pixels[231] = self.CURRENT_COLOR
+        self.pixels[250] = self.CURRENT_COLOR
+        self.pixels[294] = self.CURRENT_COLOR
+        self.pixels[295] = self.CURRENT_COLOR
+        self.pixels[296] = self.CURRENT_COLOR
+        self.pixels[297] = self.CURRENT_COLOR
+        self.pixels[298] = self.CURRENT_COLOR
+
         self.pixels.show()
 
     def below_check(self):
@@ -139,7 +176,7 @@ class Stacker_Game:
             else:
                 if self.current_frame - self.active_game_object.last_move_frame > self.MOVE_RATE:
                     piece_move()
-                    self.MOVE_RATE = random.randint(self.MOVE_RATE-1,self.MOVE_RATE+1)
+
 
     def draw_board(self):  # Push board state to the physical LEDs
         # Convert tiles to pixels
