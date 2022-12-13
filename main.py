@@ -109,6 +109,8 @@ class Stacker_Game:
 
         if self.difficulty == 0:  # Player has Lost All blocks
             self.end_game()
+        if self.max_fall == 1:
+            self.end_game()
 
         if self.active_game_object is None:  # If there is no current playable object generate one in the playable area
             self.active_game_object = Game_Object(self.difficulty)
@@ -123,7 +125,7 @@ class Stacker_Game:
                     if self.current_frame - self.active_game_object.last_fall_frame > self.FALL_RATE:
                         self.piece_fall()
                 else:
-                    if self.active_game_object.y_pos is self.max_fall or self.max_fall == 1:
+                    if self.active_game_object.y_pos is self.max_fall
                         piece_removal()  # Validate piece is in a valid location
                     self.active_game_object.is_falling = False  # Game object is no longer falling
                     self.active_game_object.is_active = False  # Will generate new object on next loop
