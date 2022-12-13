@@ -12,7 +12,7 @@ button = Button(2,bounce_time = .5)
 
 
 class Game_Object:
-    def __init__(self, length):  # Objects are created in the play area at the top of the screen
+    def __init__(self, length,current_frame):  # Objects are created in the play area at the top of the screen
         self.MOVE_STATES = ("LEFT", "RIGHT")
         self.Move_State = self.MOVE_STATES[1]
         self.length = length
@@ -21,7 +21,7 @@ class Game_Object:
         self.is_active = True  # Playable user piece
         self.is_falling = False  # User has dropped the object
         self.last_fall_frame = 0
-        self.last_move_frame = 0
+        self.last_move_frame = current_frame
 
 
 class Stacker_Game:
@@ -114,7 +114,7 @@ class Stacker_Game:
 
         if self.active_game_object is None:  # If there is no current playable object generate one in the playable area
             if self.difficulty > 0:
-                self.active_game_object = Game_Object(self.difficulty)
+                self.active_game_object = Game_Object(self.difficulty,self.current_frame)
                 for length in range(self.active_game_object.length):
                     self.Board_State[length][0] = self.active_game_object  # Update the location of the new game object
         else:  # When there is no user input we need to check the current active piece and either continue a fall or move
@@ -173,10 +173,10 @@ class Stacker_Game:
                 self.CURRENT_COLOR = (0,0,255)
                 if self.difficulty > 2:
                     self.difficulty = 2
-            elif self.max_fall < 6:
+            elif self.max_fall < 7:
                 self.CURRENT_COLOR = (255, 0, 0)
                 self.difficulty = 1
-                    
+
 
         if self.Current_State == "END":
             if self.max_fall == 1:
