@@ -79,9 +79,9 @@ class Stacker_Game:
             print(cur_y)
             if cur_y == 14:
                 return
-            for tiles in range(self.active_game_object.length + 1):
+            for tiles in range(self.active_game_object.length):
                 if self.Board_State[cur_x + tiles][cur_y + 1] == None:
-                    self.Board_State[cur_x][cur_y] = None
+                    self.Board_State[cur_x + tiles][cur_y] = None
                     self.active_game_object.length -= 1
                     self.difficulty -= 1
 
