@@ -28,7 +28,7 @@ class Stacker_Game:
         self.pixels = neopixel.NeoPixel(board.D18, 300, brightness=.5, auto_write=False)
         self.MAX_X = 5
         self.MAX_Y = 15
-        self.FRAME_TIMING = 15  # 30 frames must pass before the lock releases on input
+        self.FRAME_TIMING = 35  # 30 frames must pass before the lock releases on input
         self.FALL_RATE = 1  # Every 10 frames we can move 1 y level
         self.MOVE_RATE = 17  # Bigger is Easier Adjusted every 2 y level
         self.STATES = ("INTRO", "START",
