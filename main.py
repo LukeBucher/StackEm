@@ -6,7 +6,7 @@ import random
 import sys
 from itertools import chain
 
-RED = (255, 0, 0)
+CURRENT_COLOR = (255, 0, 0)
 BLACK = (0, 0, 0)
 button = Button(2,bounce_time = .5)
 
@@ -147,7 +147,7 @@ class Stacker_Game:
                     cur_values[i] = 299 - cur_values[i]
                 for item in cur_values:
                     if self.Board_State[x][y] is not None:
-                        output[item] = RED
+                        output[item] = CURRENT_COLOR
                     else:
                         output[item] = BLACK
 
