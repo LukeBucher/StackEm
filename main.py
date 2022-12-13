@@ -288,7 +288,7 @@ class Stacker_Game:
     def game_loop(self):  # Handles all high elevated logic for the game
         # 3 easiest - 1 hardest
         button.when_released = self.input_listen
-        self.winPrint()
+
         print("game start")
         game_state = 2
         while self.Current_State != "END":  # Run until game completion
@@ -312,6 +312,7 @@ class Stacker_Game:
         if self.Current_State == "END":
             if self.max_fall == 1:
                 print("WIN")
+                self.winPrint()
 
             else:
                 print("LOSE")
