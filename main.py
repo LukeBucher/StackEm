@@ -41,7 +41,7 @@ class Stacker_Game:
         self.last_input = 0  # Frame number where button was last counted without a lock present
         self.is_input = False
         self.active_game_object = None
-        self.difficulty = 2
+        self.difficulty = 3
         self.max_fall = 14
 
     def below_check(self):
