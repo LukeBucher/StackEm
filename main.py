@@ -168,7 +168,7 @@ class Stacker_Game:
                 1 / self.FRAME_TIMING)  # we need to pause execution so that we run at 30 iterations each step. .03 Is 30 Milliseconds for 30FPS
             self.current_frame += 1
             self.is_input = False
-
+            print(self.max_fall)
             if self.max_fall < 11:
                 self.CURRENT_COLOR = (0,0,255)
                 if self.difficulty > 2:
