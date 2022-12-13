@@ -169,7 +169,7 @@ class Stacker_Game:
             self.current_frame += 1
             self.is_input = False
             print(self.max_fall)
-            if self.max_fall < 11:
+            if 11 > self.max_fall > 7:
                 self.CURRENT_COLOR = (0,0,255)
                 if self.difficulty > 2:
                     self.difficulty = 2
