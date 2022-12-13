@@ -125,7 +125,7 @@ class Stacker_Game:
                     if self.current_frame - self.active_game_object.last_fall_frame > self.FALL_RATE:
                         self.piece_fall()
                 else:
-                    if self.active_game_object.y_pos is self.max_fall
+                    if self.active_game_object.y_pos is self.max_fall:
                         piece_removal()  # Validate piece is in a valid location
                     self.active_game_object.is_falling = False  # Game object is no longer falling
                     self.active_game_object.is_active = False  # Will generate new object on next loop
