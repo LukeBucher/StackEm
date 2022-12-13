@@ -157,7 +157,7 @@ class Stacker_Game:
 
     def game_loop(self):  # Handles all high elevated logic for the game
         # 3 easiest - 1 hardest
-        GPIO.add_event_detect(26,GPIO.FALLING, callback=self.input_listen,bouncetime=300)
+        #GPIO.add_event_detect(26,GPIO.FALLING, callback=self.input_listen,bouncetime=300)
         print("game start")
         while self.Current_State != "END":  # Run until game completion
             print(input_state)
@@ -168,6 +168,7 @@ class Stacker_Game:
             self.draw_board()  # Update LEDs if needed
             time.sleep(1/self.FRAME_TIMING)  # we need to pause execution so that we run at 30 iterations each step. .03 Is 30 Milliseconds for 30FPS
             self.current_frame += 1
+            self.is_input = True
 
 
 
