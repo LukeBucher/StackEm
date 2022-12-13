@@ -12,11 +12,11 @@ button = Button(2,bounce_time = .5)
 
 
 class Game_Object:
-    def __init__(self, length,x):  # Objects are created in the play area at the top of the screen
+    def __init__(self, length):  # Objects are created in the play area at the top of the screen
         self.MOVE_STATES = ("LEFT", "RIGHT")
         self.Move_State = self.MOVE_STATES[1]
         self.length = length
-        self.x_pos = x
+        self.x_pos = 0
         self.y_pos = 0
         self.is_active = True  # Playable user piece
         self.is_falling = False  # User has dropped the object
@@ -31,7 +31,7 @@ class Stacker_Game:
         self.MAX_Y = 15
         self.FRAME_TIMING = 35  # 30 frames must pass before the lock releases on input
         self.FALL_RATE = 1  # Every 10 frames we can move 1 y level
-        self.MOVE_RATE = 10  # Bigger is Easier Adjusted every 2 y level
+        self.MOVE_RATE = 7  # Bigger is Easier Adjusted every 2 y level
         self.STATES = ("INTRO", "START",
                        "END")  # Game state will move from INTRO to START on input, From Start to END on Game completion
 
@@ -73,7 +73,7 @@ class Stacker_Game:
             self.piece_fall()
         else:  # If the Stack is at the top of the Game area end the game
             self.end_game()
-        if self.max_fall % 2 == 1:
+        if self.max_fall % 4 == 1:
             self.MOVE_RATE -= 1
 
     def board_update(self):  # Update the current game state of the internal board
@@ -109,7 +109,7 @@ class Stacker_Game:
             self.end_game()
 
         if self.active_game_object is None:  # If there is no current playable object generate one in the playable area
-            self.active_game_object = Game_Object(self.difficulty,random.randint(0,4 - self.difficulty))
+            self.active_game_object = Game_Object(self.difficulty)
             for length in range(self.active_game_object.length):
                 self.Board_State[length][0] = self.active_game_object  # Update the location of the new game object
 
