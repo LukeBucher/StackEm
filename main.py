@@ -79,13 +79,13 @@ class Stacker_Game:
         self.pixels[127] = self.CURRENT_COLOR
         self.pixels[128] = self.CURRENT_COLOR
 
-        self.pixels[170] = self.CURRENT_COLOR
-        self.pixels[175] = self.CURRENT_COLOR
+        self.pixels[171] = self.CURRENT_COLOR
+        self.pixels[176] = self.CURRENT_COLOR
 
+        self.pixels[183] = self.CURRENT_COLOR
+        self.pixels[184] = self.CURRENT_COLOR
         self.pixels[185] = self.CURRENT_COLOR
         self.pixels[186] = self.CURRENT_COLOR
-        self.pixels[187] = self.CURRENT_COLOR
-        self.pixels[188] = self.CURRENT_COLOR
 
         self.pixels[232] = self.CURRENT_COLOR
         self.pixels[247] = self.CURRENT_COLOR
