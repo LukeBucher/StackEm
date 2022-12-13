@@ -117,9 +117,6 @@ class Stacker_Game:
                 self.active_game_object = Game_Object(self.difficulty)
                 for length in range(self.active_game_object.length):
                     self.Board_State[length][0] = self.active_game_object  # Update the location of the new game object
-
-        if self.is_input and self.active_game_object.is_falling is False:  # User input has been pressed
-            pass
         else:  # When there is no user input we need to check the current active piece and either continue a fall or move
             if self.active_game_object.is_falling:
                 if self.below_check() and self.active_game_object.y_pos < self.max_fall:
