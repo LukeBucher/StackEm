@@ -186,4 +186,4 @@ try:
 
 finally:
     GPIO.cleanup()
-    sys.exit()
+    
