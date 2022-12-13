@@ -81,7 +81,6 @@ class Stacker_Game:
     def board_update(self):  # Update the current game state of the internal board
         def piece_removal():  # Remove parts of the game piece that are not supported by pieces underneath
             cur_y, cur_x = self.active_game_object.y_pos, self.active_game_object.x_pos
-            print(cur_y)
             if cur_y == 14:
                 return
             for tiles in range(self.active_game_object.length):
