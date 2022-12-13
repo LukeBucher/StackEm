@@ -106,7 +106,7 @@ class Stacker_Game:
         self.pixels[298] = self.CURRENT_COLOR
 
         self.pixels.show()
-        sys.exit()
+        
 
     def winPrint(self):
         for item in range(len(self.pixels)):
@@ -171,7 +171,7 @@ class Stacker_Game:
         self.pixels[249] = self.CURRENT_COLOR
 
         self.pixels.show()
-        sys.exit()
+
 
     def below_check(self):
         cur_y, cur_x = self.active_game_object.y_pos, self.active_game_object.x_pos
