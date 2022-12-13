@@ -157,7 +157,7 @@ class Stacker_Game:
 
     def game_loop(self):  # Handles all high elevated logic for the game
         # 3 easiest - 1 hardest
-        #GPIO.add_event_detect(26,GPIO.FALLING, callback=self.input_listen,bouncetime=300)
+        GPIO.add_event_detect(26,GPIO.FALLING, callback=self.input_listen,bouncetime=300)
         print("game start")
         while self.Current_State != "END":  # Run until game completion
             print(input_state)
