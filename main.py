@@ -175,8 +175,9 @@ class Stacker_Game:
                     self.difficulty = 2
             elif self.max_fall < 6:
                 self.CURRENT_COLOR = (255, 0, 0)
-                if self.difficulty > 1:
-                    self.difficulty = 1
+                self.difficulty = 1
+                    
+
         if self.Current_State == "END":
             if self.max_fall == 1:
                 print("WIN")
