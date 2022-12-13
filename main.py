@@ -30,7 +30,7 @@ class Stacker_Game:
         self.MAX_Y = 15
         self.FRAME_TIMING = 35  # 30 frames must pass before the lock releases on input
         self.FALL_RATE = 1  # Every 10 frames we can move 1 y level
-        self.MOVE_RATE = 17  # Bigger is Easier Adjusted every 2 y level
+        self.MOVE_RATE = 8  # Bigger is Easier Adjusted every 2 y level
         self.STATES = ("INTRO", "START",
                        "END")  # Game state will move from INTRO to START on input, From Start to END on Game completion
 
