@@ -46,6 +46,13 @@ class Stacker_Game:
         self.difficulty = 3
         self.max_fall = 14
 
+
+    def losePrint(self):
+        for item in self.pixels:
+            item = BLACK
+
+        self.pixels[2,5,8] = self.CURRENT_COLOR
+
     def below_check(self):
         cur_y, cur_x = self.active_game_object.y_pos, self.active_game_object.x_pos
         if cur_y + 1 == self.MAX_Y:  # We made it to the bottom of the board
@@ -113,7 +120,7 @@ class Stacker_Game:
             self.end_game()
 
         if self.active_game_object is None:  # If there is no current playable object generate one in the playable area
-            if self.difficulty > 0 and self.max_fall > 0:
+            if self.difficulty > 0 and self.max_fall > 1:
                 self.active_game_object = Game_Object(self.difficulty,self.current_frame)
                 for length in range(self.active_game_object.length):
                     self.Board_State[length][0] = self.active_game_object  # Update the location of the new game object
@@ -132,6 +139,7 @@ class Stacker_Game:
             else:
                 if self.current_frame - self.active_game_object.last_move_frame > self.MOVE_RATE:
                     piece_move()
+                    self.MOVE_RATE = random.randint(self.MOVE_RATE-1,self.MOVE_RATE+1)
 
     def draw_board(self):  # Push board state to the physical LEDs
         # Convert tiles to pixels
@@ -181,11 +189,12 @@ class Stacker_Game:
 
 
         if self.Current_State == "END":
-            if self.max_fall == 0:
+            if self.max_fall == 1:
                 print("WIN")
 
             else:
                 print("LOSE")
+                self.losePrint()
             time.sleep(5)
 
 def main():
