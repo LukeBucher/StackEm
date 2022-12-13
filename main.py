@@ -62,7 +62,7 @@ class Stacker_Game:
             return True
 
         def piece_fall(entry):  # Move the piece at the current fall rate
-            print("".format(entry))
+            print(entry)
             cur_y, cur_x = self.active_game_object.y_pos, self.active_game_object.x_pos
             for tiles in range(self.active_game_object.length):
                 self.Board_State[cur_x][cur_y] = None
