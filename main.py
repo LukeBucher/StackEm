@@ -50,8 +50,8 @@ class Stacker_Game:
     def losePrint(self):
         for item in self.pixels:
             item = BLACK
-
-        self.pixels[2,5,8] = self.CURRENT_COLOR
+        self.pixels[2,5,8,55,56,57,58,63,66,67,68,69,112,116,117,118,126,127,128,129,171,176,183,186,187,188,189,231,250,294,295,296,297,298] = self.CURRENT_COLOR
+        self.pixels.show()
 
     def below_check(self):
         cur_y, cur_x = self.active_game_object.y_pos, self.active_game_object.x_pos
