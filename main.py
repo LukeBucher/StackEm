@@ -179,7 +179,7 @@ class Stacker_Game:
 
 
         if self.Current_State == "END":
-            if self.max_fall == 1:
+            if self.max_fall == 0:
                 print("WIN")
 
             else:
