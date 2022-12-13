@@ -6,7 +6,7 @@ import random
 import sys
 from itertools import chain
 
-CURRENT_COLOR = (0, 255, 0)
+
 BLACK = (0, 0, 0)
 button = Button(2,bounce_time = .5)
 
@@ -26,6 +26,7 @@ class Game_Object:
 
 class Stacker_Game:
     def __init__(self):
+        self.CURRENT_COLOR = (0, 255, 0)
         self.pixels = neopixel.NeoPixel(board.D18, 300, brightness=.5, auto_write=False)
         self.MAX_X = 5
         self.MAX_Y = 15
@@ -148,7 +149,7 @@ class Stacker_Game:
                     cur_values[i] = 299 - cur_values[i]
                 for item in cur_values:
                     if self.Board_State[x][y] is not None:
-                        output[item] = CURRENT_COLOR
+                        output[item] = self.CURRENT_COLOR
                     else:
                         output[item] = BLACK
 
@@ -169,12 +170,10 @@ class Stacker_Game:
             self.is_input = False
 
             if self.max_fall < 11 and self.difficulty > 2:
-                global CURRENT_COLOR
-                CURRENT_COLOR = (255, 255, 51)
+                self.CURRENT_COLOR = (255, 255, 51)
                 self.difficulty = 2
             elif self.max_fall < 6 and self.difficulty > 1:
-                global CURRENT_COLOR
-                CURRENT_COLOR = (255, 0, 0)
+                self.CURRENT_COLOR = (255, 0, 0)
                 self.difficulty = 1
 
 def main():
