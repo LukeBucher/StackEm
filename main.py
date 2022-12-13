@@ -161,6 +161,7 @@ class Stacker_Game:
         # 3 easiest - 1 hardest
         button.when_released = self.input_listen
         print("game start")
+        game_state = 2
         while self.Current_State != "END":  # Run until game completion
             self.board_update()  # Move gameplay loop
             self.draw_board()  # Update LEDs if needed
@@ -169,13 +170,15 @@ class Stacker_Game:
             self.current_frame += 1
             self.is_input = False
             print(self.max_fall)
-            if 11 > self.max_fall > 7:
+            if 11 > self.max_fall > 7 and game_state == 2:
                 self.CURRENT_COLOR = (0,0,255)
+                game_state = 1
                 if self.difficulty > 2:
                     self.difficulty = 2
-            elif self.max_fall < 7:
+            elif self.max_fall < 7 and game_state == 1:
                 self.CURRENT_COLOR = (255, 0, 0)
                 self.difficulty = 1
+                game_state = 0
 
 
         if self.Current_State == "END":
