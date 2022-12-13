@@ -30,7 +30,7 @@ class Stacker_Game:
         self.MAX_Y = 15
         self.FRAME_TIMING = 35  # 30 frames must pass before the lock releases on input
         self.FALL_RATE = 1  # Every 10 frames we can move 1 y level
-        self.MOVE_RATE = 8  # Bigger is Easier Adjusted every 2 y level
+        self.MOVE_RATE = 10  # Bigger is Easier Adjusted every 2 y level
         self.STATES = ("INTRO", "START",
                        "END")  # Game state will move from INTRO to START on input, From Start to END on Game completion
 
@@ -72,6 +72,8 @@ class Stacker_Game:
             self.piece_fall()
         else:  # If the Stack is at the top of the Game area end the game
             self.end_game()
+        if self.max_fall % 2 is 1:
+            self.MOVE_RATE -= 1
 
     def board_update(self):  # Update the current game state of the internal board
         def piece_removal():  # Remove parts of the game piece that are not supported by pieces underneath
