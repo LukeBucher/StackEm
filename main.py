@@ -48,7 +48,7 @@ class Stacker_Game:
 
 
     def losePrint(self):
-        for item in range(self.pixels):
+        for item in range(len(self.pixels)):
             self.pixels[item] = BLACK
         self.pixels.show()
         self.pixels[1] = self.CURRENT_COLOR
