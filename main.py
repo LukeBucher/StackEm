@@ -169,10 +169,12 @@ class Stacker_Game:
             self.is_input = False
 
             if self.max_fall < 11 and self.difficulty > 2:
-                CURRENT_COLOR = (255,255,51)
+                global CURRENT_COLOR
+                CURRENT_COLOR = (255, 255, 51)
                 self.difficulty = 2
             elif self.max_fall < 6 and self.difficulty > 1:
-                CURRENT_COLOR = (255,0,0)
+                global CURRENT_COLOR
+                CURRENT_COLOR = (255, 0, 0)
                 self.difficulty = 1
 
 def main():
