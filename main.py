@@ -32,7 +32,7 @@ class Stacker_Game:
         self.MAX_Y = 15
         self.FRAME_TIMING = 35  # 30 frames must pass before the lock releases on input
         self.FALL_RATE = 1  # Every 10 frames we can move 1 y level
-        self.MOVE_RATE = 7  # Bigger is Easier Adjusted every 2 y level
+        self.MOVE_RATE = 6  # Bigger is Easier Adjusted every 2 y level
         self.STATES = ("INTRO", "START",
                        "END")  # Game state will move from INTRO to START on input, From Start to END on Game completion
 
@@ -177,14 +177,19 @@ class Stacker_Game:
             elif self.max_fall < 6 and self.difficulty > 1:
                 self.CURRENT_COLOR = (255, 0, 0)
                 self.difficulty = 1
+        if self.Current_State == "END":
+            if self.max_fall == 1:
+                print("WIN")
+
+            else:
+                print("LOSE")
+            time.sleep(5)
 
 def main():
     print("start")
-    game = Stacker_Game()
-    game.game_loop()
-    return print("Success")
-
-
+    while True:
+        game = Stacker_Game()
+        game.game_loop()
 
 main()
 
