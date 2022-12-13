@@ -1,4 +1,4 @@
-import RPi.GPIO as GPIO
+from gpiozero import Button
 import board
 import neopixel
 import time
@@ -7,9 +7,7 @@ from itertools import chain
 
 RED = (255, 0, 0)
 BLACK = (0, 0, 0)
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(26, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-input_state = GPIO.input(26)
+button = Button(2)
 
 
 class Game_Object:
@@ -46,7 +44,7 @@ class Stacker_Game:
         self.difficulty = 2
         self.max_fall = 14
 
-    def input_listen(self,channel):  # Listen for button pushes
+    def input_listen(self):  # Listen for button pushes
         self.is_input = True
         self.last_input = self.current_frame
         return
@@ -158,10 +156,9 @@ class Stacker_Game:
 
     def game_loop(self):  # Handles all high elevated logic for the game
         # 3 easiest - 1 hardest
-        GPIO.add_event_detect(26, GPIO.FALLING, callback=self.input_listen, bouncetime=300)
+        button.when_released = self.input_listen
         print("game start")
         while self.Current_State != "END":  # Run until game completion
-            print(input_state)
             if self.active_game_object is not None:
                 if self.current_frame - self.last_input < self.FRAME_TIMING or self.active_game_object.is_falling is True:  # Set input false if lockout
                     self.is_input = False
@@ -180,10 +177,7 @@ def main():
     return print("Success")
 
 
-try:
-    main()
 
+main()
 
-finally:
-    GPIO.cleanup()
     
