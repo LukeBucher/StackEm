@@ -45,10 +45,9 @@ class Stacker_Game:
         self.max_fall = 14
 
     def input_listen(self):  # Listen for button pushes
-        print("button pressed")
         self.is_input = True
         self.last_input = self.current_frame
-        
+
 
 
     def board_update(self):  # Update the current game state of the internal board
@@ -162,6 +161,7 @@ class Stacker_Game:
         button.when_released = self.input_listen
         print("game start")
         while self.Current_State != "END":  # Run until game completion
+            print(self.is_input)
             if self.active_game_object is not None:
                 if self.current_frame - self.last_input < self.FRAME_TIMING or self.active_game_object.is_falling is True:  # Set input false if lockout
                     self.is_input = False
