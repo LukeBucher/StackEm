@@ -6,6 +6,7 @@ from itertools import chain
 
 RED = (255, 0, 0)
 BLACK = (0, 0, 0)
+GPIO.cleanup()
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(26, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 input_state = GPIO.input(26)
