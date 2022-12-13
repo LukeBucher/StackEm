@@ -45,6 +45,7 @@ class Stacker_Game:
         self.max_fall = 14
 
     def input_listen(self):  # Listen for button pushes
+        print("button pressed")
         self.is_input = True
         self.last_input = self.current_frame
         return
