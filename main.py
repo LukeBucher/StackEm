@@ -167,7 +167,7 @@ class Stacker_Game:
             time.sleep(
                 1 / self.FRAME_TIMING)  # we need to pause execution so that we run at 30 iterations each step. .03 Is 30 Milliseconds for 30FPS
             self.current_frame += 1
-
+            self.is_input = False
 
 def main():
     print("start")
