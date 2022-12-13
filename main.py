@@ -6,10 +6,10 @@ from itertools import chain
 
 RED = (255, 0, 0)
 BLACK = (0, 0, 0)
-GPIO.cleanup()
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(26, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 input_state = GPIO.input(26)
+
 
 class Game_Object:
     def __init__(self, length):  # Objects are created in the play area at the top of the screen
@@ -26,7 +26,7 @@ class Game_Object:
 
 class Stacker_Game:
     def __init__(self):
-        self.pixels = neopixel.NeoPixel(board.D18, 300,brightness=.5,auto_write=False)
+        self.pixels = neopixel.NeoPixel(board.D18, 300, brightness=.5, auto_write=False)
         self.MAX_X = 5
         self.MAX_Y = 15
         self.FRAME_TIMING = 15  # 30 frames must pass before the lock releases on input
@@ -36,7 +36,8 @@ class Stacker_Game:
                        "END")  # Game state will move from INTRO to START on input, From Start to END on Game completion
 
         self.Current_State = self.STATES[0]  # All Games objects will start at the intro screen
-        self.Board_State = [[None for i in range(15)] for j in range(5)]  # An empty board that does not contain any game objects start of game
+        self.Board_State = [[None for i in range(15)] for j in
+                            range(5)]  # An empty board that does not contain any game objects start of game
         self.current_frame = 0  # total count of number of frames for this game iteration
         self.last_input = 0  # Frame number where button was last counted without a lock present
         self.is_input = False
@@ -107,7 +108,6 @@ class Stacker_Game:
             for length in range(self.active_game_object.length):
                 self.Board_State[length][0] = self.active_game_object  # Update the location of the new game object
 
-
         if self.is_input and self.active_game_object.is_falling is False:  # User input has been pressed
             self.active_game_object.is_falling = True
             if below_check():  # If there is no piece below
@@ -157,7 +157,7 @@ class Stacker_Game:
 
     def game_loop(self):  # Handles all high elevated logic for the game
         # 3 easiest - 1 hardest
-        GPIO.add_event_detect(26,GPIO.FALLING, callback=self.input_listen,bouncetime=300)
+        GPIO.add_event_detect(26, GPIO.FALLING, callback=self.input_listen, bouncetime=300)
         print("game start")
         while self.Current_State != "END":  # Run until game completion
             print(input_state)
@@ -166,20 +166,22 @@ class Stacker_Game:
                     self.is_input = False
             self.board_update()  # Move gameplay loop
             self.draw_board()  # Update LEDs if needed
-            time.sleep(1/self.FRAME_TIMING)  # we need to pause execution so that we run at 30 iterations each step. .03 Is 30 Milliseconds for 30FPS
+            time.sleep(
+                1 / self.FRAME_TIMING)  # we need to pause execution so that we run at 30 iterations each step. .03 Is 30 Milliseconds for 30FPS
             self.current_frame += 1
             self.is_input = True
 
 
-
 def main():
-
     print("start")
     game = Stacker_Game()
     game.game_loop()
     return print("Success")
 
 
+try:
+    main()
 
 
-main()
+finally:
+    GPIO.cleanup()
