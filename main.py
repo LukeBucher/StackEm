@@ -50,6 +50,7 @@ class Stacker_Game:
     def losePrint(self):
         for item in self.pixels:
             item = BLACK
+        self.pixels.show()
         self.pixels[2] = self.CURRENT_COLOR
         self.pixels[5] = self.CURRENT_COLOR
         self.pixels[8] = self.CURRENT_COLOR
@@ -89,7 +90,8 @@ class Stacker_Game:
         self.pixels[298] = self.CURRENT_COLOR
 
         self.pixels.show()
-
+        sys.exit()
+        
     def below_check(self):
         cur_y, cur_x = self.active_game_object.y_pos, self.active_game_object.x_pos
         if cur_y + 1 == self.MAX_Y:  # We made it to the bottom of the board
